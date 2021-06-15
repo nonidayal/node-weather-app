@@ -1,0 +1,18 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/handler.js"></script>
+    
+    </head>
+    <body id="mainblock">
+        {{>header}}<br>
+        <form>
+            <input id="location" placeholder="Location"/>
+            <input onclick="onSearch(event)"  type="submit" value="Search">
+            <p id="p1"></p>
+            <p id="p2"></p>
+        </form>
+        {{>footer}}
+    </body>
+</html>

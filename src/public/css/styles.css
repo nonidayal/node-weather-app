@@ -1,0 +1,27 @@
+p {
+  font: bold;
+  color: blue;
+  size: 200px;
+}
+
+body {
+  display: inline-block !important;
+  margin-left: 9% !important;
+}
+
+a {
+  color: grey;
+}
+
+#footerid {
+  left: 0;
+  bottom: 0;
+  position: fixed;
+  color: black;
+  margin-left: 9%;
+  border-top: solid 1px;
+}
+
+p {
+  color: black;
+}
