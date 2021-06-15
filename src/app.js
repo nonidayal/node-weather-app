@@ -6,6 +6,7 @@ const staticpath = path.join(__dirname, "../src/public");
 
 const viewpath = path.join(__dirname, "../src/views");
 const partialpath = path.join(__dirname, "../src/partials");
+const port = process.env.PORT || 3000;
 hbs.registerPartials(partialpath);
 app.set("view engine", "hbs");
 app.set("views", viewpath);
@@ -46,6 +47,6 @@ app.get("*", (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log("listening at port 3000");
+app.listen(port, () => {
+  console.log("listening at port " + port);
 });
