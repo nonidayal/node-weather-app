@@ -1,3 +1,4 @@
+const request = require("request");
 const geocode = (location, callback) => {
   request(
     {
@@ -8,7 +9,11 @@ const geocode = (location, callback) => {
     },
 
     (error, response) => {
-      callback(response);
+      if (error) {
+        callback("No location found", undefined);
+      } else {
+        callback(undefined, JSON.parse(response.toJSON().body));
+      }
     }
   );
 };

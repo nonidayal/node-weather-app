@@ -2,6 +2,8 @@ const express = require("express");
 const path = require("path");
 const hbs = require("hbs");
 const app = express();
+const geocode = require("./services/geocode");
+const forecast = require("./services/geolocation");
 const staticpath = path.join(__dirname, "../src/public");
 
 const viewpath = path.join(__dirname, "../src/views");
@@ -13,10 +15,35 @@ app.set("views", viewpath);
 //setting static path
 app.use(express.static(staticpath));
 app.get("/weather", (req, res) => {
-  res.render("weather", {
-    title: "Weather Update",
-    name: "Noni",
-  });
+  // console.log(req.query.location);
+  if (!req.query.location) {
+    res.render("weather", {
+      title: "Weather Update",
+      name: "Noni",
+    });
+    // return "No location found for the given search";
+  } else {
+    geocode(req.query.location, (error, response) => {
+      if (error) {
+        return error;
+      } else {
+        console.log(response.features[0].center[1]);
+        console.log(response.features[0].center[0]);
+        forecast(
+          response.features[0].center[1],
+          response.features[0].center[0],
+          (locationerror, locationresponse) => {
+            if (locationerror) {
+              return locationerror;
+            } else {
+              console.log(locationresponse);
+              res.send(locationresponse);
+            }
+          }
+        );
+      }
+    });
+  }
 });
 
 app.get("/about", (req, res) => {
